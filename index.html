@@ -125,9 +125,36 @@
       }
     });
 
-    document.getElementById('automationForm').addEventListener('submit', function(e) {
+    document.getElementById('automationForm').addEventListener('submit', async function(e) {
       e.preventDefault();
-      alert('Form submitted successfully!');
+
+      const data = {
+        expertName: document.getElementById('expertName').value,
+        type: document.getElementById('typeSelect').value,
+        useCaseName: document.getElementById('useCaseName').value,
+        status: document.getElementById('status').value
+      };
+
+      try {
+        const response = await fetch("https://flow.sokt.io/func/scriNu86SBQl", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify(data)
+        });
+
+        if (response.ok) {
+          alert("✅ Form submitted successfully!");
+          document.getElementById('automationForm').reset();
+          useCaseSection.classList.add('hidden');
+          statusSection.classList.add('hidden');
+        } else {
+          alert("❌ Error submitting form. Please try again.");
+        }
+      } catch (error) {
+        alert("⚠️ Failed to connect to webhook: " + error.message);
+      }
     });
   </script>
 </body>
