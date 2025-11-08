@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Automation Form</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f8f9fb;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .form-container {
+      background: white;
+      padding: 30px 40px;
+      border-radius: 16px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+      width: 400px;
+      transition: all 0.3s ease;
+    }
+
+    .form-container:hover {
+      box-shadow: 0 6px 25px rgba(0,0,0,0.15);
+    }
+
+    h2 {
+      text-align: center;
+      color: #333;
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 6px;
+      font-weight: 500;
+      color: #555;
+    }
+
+    input, select, textarea, button {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 15px;
+      transition: all 0.2s ease;
+    }
+
+    input:focus, select:focus, textarea:focus {
+      outline: none;
+      border-color: #007bff;
+      box-shadow: 0 0 4px rgba(0,123,255,0.3);
+    }
+
+    button {
+      background-color: #007bff;
+      color: white;
+      border: none;
+      cursor: pointer;
+      font-weight: 600;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="form-container">
+    <h2>Team Automation</h2>
+    <form id="automationForm">
+      <label for="expertName">Automation Expert Name</label>
+      <input type="text" id="expertName" name="expertName" placeholder="Enter your name" required>
+
+      <label for="typeSelect">Select Type</label>
+      <select id="typeSelect" required>
+        <option value="">-- Select --</option>
+        <option value="useCase">Use Case</option>
+        <option value="builtInLive">Built in Live</option>
+      </select>
+
+      <div id="useCaseSection" class="hidden">
+        <label for="useCaseName">Use Case Name</label>
+        <input type="text" id="useCaseName" placeholder="Enter use case name">
+      </div>
+
+      <div id="statusSection" class="hidden">
+        <label for="status">Status</label>
+        <select id="status">
+          <option value="">-- Select Status --</option>
+          <option value="notStarted">Not Started</option>
+          <option value="stuck">Stuck</option>
+          <option value="inProgress">In Progress</option>
+          <option value="completed">Completed</option>
+        </select>
+      </div>
+
+      <button type="submit">Submit</button>
+    </form>
+  </div>
+
+  <script>
+    const typeSelect = document.getElementById('typeSelect');
+    const useCaseSection = document.getElementById('useCaseSection');
+    const statusSection = document.getElementById('statusSection');
+
+    typeSelect.addEventListener('change', function() {
+      const value = this.value;
+      if (value === 'useCase' || value === 'builtInLive') {
+        useCaseSection.classList.remove('hidden');
+        statusSection.classList.remove('hidden');
+      } else {
+        useCaseSection.classList.add('hidden');
+        statusSection.classList.add('hidden');
+      }
+    });
+
+    document.getElementById('automationForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      alert('Form submitted successfully!');
+    });
+  </script>
+</body>
+</html>
