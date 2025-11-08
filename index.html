@@ -136,7 +136,8 @@
       };
 
       try {
-        const response = await fetch("https://flow.sokt.io/func/scriNu86SBQl", {
+        // ✅ Using CORS proxy to bypass browser restriction
+        const response = await fetch("https://corsproxy.io/?" + encodeURIComponent("https://flow.sokt.io/func/scriNu86SBQl"), {
           method: "POST",
           headers: {
             "Content-Type": "application/json"
